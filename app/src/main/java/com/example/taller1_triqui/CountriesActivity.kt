@@ -1,12 +1,9 @@
 package com.example.taller1_triqui
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taller1_triqui.databinding.ActivityCountriesBinding
 import org.json.JSONObject
-import java.io.InputStream
 
 class CountriesActivity : AppCompatActivity() {
 
@@ -19,15 +16,10 @@ class CountriesActivity : AppCompatActivity() {
         binding = ActivityCountriesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Cargar los países desde el JSON
         loadCountriesFromJson()
+        var adapter = MyAdapter(this, countryList)
+        binding.countryList.adapter = adapter
 
-        // Configurar RecyclerView
-        binding.recyclerCountries.layoutManager = LinearLayoutManager(this)
-        val adapter = CountryAdapter(countryList) { country ->
-            openCountryDetail(country)
-        }
-        binding.recyclerCountries.adapter = adapter
     }
 
     private fun loadCountriesFromJson() {
@@ -40,18 +32,11 @@ class CountriesActivity : AppCompatActivity() {
             val country = Country(
                 name = countryJson.getString("nombre_pais"),
                 capital = countryJson.getString("capital"),
-                code = countryJson.getString("sigla")
+                code = countryJson.getString("sigla"),
+                nameIt = countryJson.getString("nombre_pais_int"),
+                bandera = countryJson.getString("bandera")
             )
             countryList.add(country)
         }
-    }
-
-    private fun openCountryDetail(country: Country) {
-        val intent = Intent(this, CountryDetailActivity::class.java).apply {
-            putExtra("country_name", country.name)
-            putExtra("country_capital", country.capital)
-            putExtra("country_code", country.code)
-        }
-        startActivity(intent)
     }
 }
