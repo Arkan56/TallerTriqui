@@ -5,4 +5,5 @@ Integrantes:
 - Ciro sebastian Saavedra Medina
 - Daniel Felipe León Perez
 
-Link del video de funcionalidades (youtube) : 
+Link del video de funcionalidades (youtube) : https://youtu.be/Ni-4WTU5N-M
+
